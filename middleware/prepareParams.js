@@ -1,10 +1,9 @@
 function prepareParams(req, res, next) {
 
-	const limit = +req.query.size || 20;
-	const page = +req.query.page || 1;
-	const skip = (limit*(page-1))+1;
+	let { size: limit=20, page=1, fields } = req.query;
+	limit = +limit;
 
-	const fields = req.query.fields;
+	const skip = ( limit * (page-1))+1;
 
 	if (fields) {
 
