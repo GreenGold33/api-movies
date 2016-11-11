@@ -1,7 +1,6 @@
 function getMovies(db, req, res) {
 
 	const { skip, limit, projection } = req
-
 	db.collection("movieDetails")
 		.find( { } , projection )
 		.sort( { title:1 } )

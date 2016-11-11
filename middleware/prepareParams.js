@@ -5,14 +5,19 @@ function prepareParams(req, res, next) {
 	const skip = (limit*(page-1))+1;
 
 	const fields = req.query.fields;
-	const projection = fields.split(',').reduce( (oProj, field) => {
-		oProj[field] = 1;
-		return oProj;
-	}, { _id: 1 })
+
+	if (fields) {
+
+		const projection = fields.split(',').reduce( (oProj, field) => {
+			oProj[field] = 1;
+			return oProj;
+		}, {} )
+
+		req.projection = projection;
+	}
 
 	req.limit = limit;
 	req.skip = skip;
-	req.projection = projection;
 
 	next()
 }
