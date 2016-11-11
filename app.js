@@ -12,11 +12,10 @@ const PORT = 3000;
 
 const app = express();
 
-
 MongoClient.connect(url, (err, db) => {
 
 	if (err) throw err;
-	console.log("connected to DB...")
+	console.log("Connected to DB...")
 
 	app.use( prepareParams )
 
