@@ -6,6 +6,7 @@ const prepareParams = require('./middleware/prepareParams')
 const getMovies = require('./handlers/getMovies')
 const getMoviesByGenre = require('./handlers/getMoviesByGenre')
 const getMoviesByCountry = require('./handlers/getMoviesByCountry')
+const getMovieById = require('./handlers/getMovieById')
 
 const url = "mongodb://localhost:27017/movies"
 const PORT = 3000;
@@ -22,6 +23,7 @@ MongoClient.connect(url, (err, db) => {
 	app.get('/movies', getMovies.bind(null, db) )
 	app.get('/movies/genres/:genre', getMoviesByGenre.bind(null, db) )
 	app.get('/movies/countries/:country', getMoviesByCountry.bind(null, db))
+	app.get('/movie/:id', getMovieById.bind(null, db) )
 
 })
 
