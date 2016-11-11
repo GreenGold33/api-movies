@@ -34,7 +34,7 @@ MongoClient.connect(url, (err, db) => {
 
 	})
 
-	// /movies/genres/Comedy
+	// /movies/genres/Comedy?fields=title,year
 	// /movies/genres/Thriller
 	// /movies/genres/Action
 
@@ -45,13 +45,22 @@ MongoClient.connect(url, (err, db) => {
 		const skip = (limit*(page-1))+1;
 
 		const genre = req.params.genre;
+		const fields = req.query.fields;
+		console.log (fields)
+		console.log (fields.split(','))
+		const projection = fields.split(',').reduce( (oProj, field) => {
+			oProj[field] = 1;
+			return oProj;
+		}, {})
+
+		// { "title" : 1, "year" : 1 , "director" : 1 }"
 
 		// (page === 1) ==> from 1;
 		// (page === 2) ==> from 21;
 		// (page === 3) ==> from 41;
 
 		db.collection("movieDetails")
-			.find( { genres: genre } /* , { title: 1, _id: 0 } */ )
+			.find( { genres: genre }, projection )
 			.sort( { title:1 } )
 			.limit( limit )
 			.skip( skip )
