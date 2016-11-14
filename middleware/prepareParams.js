@@ -13,6 +13,16 @@ function prepareParams(req, res, next) {
 		}, {} )
 
 		req.projection = projection;
+
+		// const projectionObject = {};
+		// const aFields = fields.split(','); // array w/ fields
+		// for (let i=0; i<aFields.length; i++) {
+		// 	let currentField = aFields[i]; // title | year ...
+		// 	projectionObject[currentField] = 1
+		// }
+
+		// req.projection = projectionObject
+
 	}
 
 	req.limit = limit;
